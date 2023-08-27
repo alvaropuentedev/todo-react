@@ -8,9 +8,6 @@ export const ItemList = () => {
 
   
   useEffect( () => {
-      setTimeout(() => {
-        location.reload();
-      }, 60000);
       handleGetItems()
   },[handleGetItems])
 
