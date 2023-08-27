@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 export const ItemList = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
-  const [audio] = useState(new Audio('/public/assets/audio/deleteSound.mp3'));
+  const [audio] = useState(new Audio('/assets/audio/deleteSound.mp3'));
   const apiUrl: string = 'https://todo-backend-springboot-production.up.railway.app/api/todoitems'
 
   const handleDeleteItems = async (id_item: number) => {
