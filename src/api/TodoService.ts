@@ -8,7 +8,7 @@ export const TodoService = () => {
 
     const [items, setItems] = useState<Item[]>([]);
     const [loading, setLoading] = useState(true);
-    const [audio] = useState(new Audio('/assets/audio/deleteSound.mp3'));
+    const [audio] = useState(new Audio('/assets/audio/LetitgoDeleteSound.mp3'));
     const apiUrl: string = 'https://todo-backend-springboot-production.up.railway.app/api/todoitems'
   
 
