@@ -14,24 +14,28 @@ export const FormAddItem = () => {
       id_item: 0,
       description: itemDescription,
     };
-    try {
-      const res = await fetch(apiUrl,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newItem)
-        })
-
-      if (res.ok) {
-        console.log('Item added successfully.');
-        setItemDescription('');
-        handleGetItems()
-      } else {
-        console.error('Failed to add item.');
+    if (itemDescription !== '') {
+      try {
+      
+        const res = await fetch(apiUrl,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newItem)
+          })
+  
+        if (res.ok) {
+          console.log('Item added successfully.');
+          setItemDescription('');
+          handleGetItems()
+        } else {
+          console.error('Failed to add item.');
+        }
+      } catch (error) {
+        console.error('Error adding item:', error);
       }
-    } catch (error) {
-      console.error('Error adding item:', error);
     }
+    
   }
 
   return (
