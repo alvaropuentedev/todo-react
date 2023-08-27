@@ -1,50 +1,18 @@
-import { useEffect, useState } from 'react'
-import { Item } from '../../interfaces/Item';
+import { useEffect } from 'react'
 import { ButtonDelete } from '../utils';
-import { handleGetItems } from '../../../api/todo.api';
-import Swal from 'sweetalert2';
+import { TodoService } from '../../../api';
 
 export const ItemList = () => {
-  const [items, setItems] = useState<Item[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [audio] = useState(new Audio('/assets/audio/deleteSound.mp3'));
-  const apiUrl: string = 'https://todo-backend-springboot-production.up.railway.app/api/todoitems'
+  const { items, loading, handleGetItems, handleDeleteItems } = TodoService()
 
-  const handleDeleteItems = async (id_item: number) => {
-    try {
-      const res = await fetch(apiUrl + '/' + id_item, { method: 'DELETE' })
-      if (res.ok) {
-      audio.play()
-      const updateItemsList = await handleGetItems()
-      setItems(updateItemsList)
-      Swal.fire({
-        icon: 'success',
-        width: '50%',
-        timer: 1000,
-        showConfirmButton: false
-      })
-      }
-    } catch (error) {
-      console.error('Error deleting item:', error);
-    }
-    
-  }
+
   
   useEffect( () => {
-    const fetchItems = async () => {
       setTimeout(() => {
         location.reload();
       }, 60000);
-      try {
-        const itemsData = await handleGetItems();
-        setItems(itemsData);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false)
-      }
-    }
-    fetchItems()
-  },[])
+      handleGetItems()
+  },[handleGetItems])
 
   return (
     <>

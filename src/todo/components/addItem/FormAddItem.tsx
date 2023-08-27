@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { Item } from '../../interfaces/Item';
+import { TodoService } from '../../../api';
 
 export const FormAddItem = () => {
+  const { handleGetItems } = TodoService();
   const [itemDescription, setItemDescription] = useState('');
   const apiUrl: string = 'https://todo-backend-springboot-production.up.railway.app/api/todoitems'
 
@@ -23,7 +25,7 @@ export const FormAddItem = () => {
       if (res.ok) {
         console.log('Item added successfully.');
         setItemDescription('');
-        window.location.reload()
+        handleGetItems()
       } else {
         console.error('Failed to add item.');
       }
