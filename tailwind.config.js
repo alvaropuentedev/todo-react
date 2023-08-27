@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'todo-custom-color': '#fc657e'
+      },
+    },
   },
   plugins: [],
 }
