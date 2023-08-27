@@ -1,41 +1,41 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Item } from '../../interfaces/Item';
 import { ButtonDelete } from '../utils';
+import { handleGetItems } from '../../../api/todo.api';
 
 export const ItemList = () => {
-  const [items, SetItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const apiUrl: string = 'https://todo-backend-springboot-production.up.railway.app/api/todoitems'
 
-  const getItems = async () => {
-    try {
-
-      const res = await fetch(apiUrl, { method: 'GET' })
-      const jsonData: Item[] = await res.json();
-      SetItems(jsonData)
-      setLoading(false);
-
-    } catch (error) {
-
-      console.error('Error fetching items:', error);
-      setLoading(false);
-
-    }
-  }
-
-
-  const deleteItems = async (id_item: number) => {
+  const handleDeleteItems = async (id_item: number) => {
     try {
       const res = await fetch(apiUrl + '/' + id_item, { method: 'DELETE' })
-      if (res.ok) await getItems();
+      if (res.ok) {
+      const updateItemsList = await handleGetItems()
+      setItems(updateItemsList)
+      }
     } catch (error) {
       console.error('Error deleting item:', error);
     }
     
   }
-  useEffect(() => {
-    getItems();
-  }, []);
+  
+  useEffect( () => {
+    const fetchItems = async () => {
+      setTimeout(() => {
+        location.reload();
+      }, 60000);
+      try {
+        const itemsData = await handleGetItems();
+        setItems(itemsData);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false)
+      }
+    }
+    fetchItems()
+  },[])
 
   return (
     <>
@@ -51,7 +51,7 @@ export const ItemList = () => {
                     <div className='text-lg text-black mr-24'>
                       <p>{item.description}</p>
                     </div>
-                    <ButtonDelete onClick={ () => deleteItems(item.id_item) }/>
+                    <ButtonDelete onClick={ () => handleDeleteItems(item.id_item) }/>
                   </div>
                 <hr className="mt-2"/>
                 </li>
