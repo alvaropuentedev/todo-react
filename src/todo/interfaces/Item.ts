@@ -1,5 +1,6 @@
+import { ItemElement } from "./ItemElement";
+
 export interface Item {
-    id_item:      number;
-    description: string;
-  }
+  items: ItemElement[];
+}
   

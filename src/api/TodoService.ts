@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 export const TodoService = () => {
 
 
-    const [items, setItems] = useState<Item[]>([]);
+    const [allItems, setAllItems] = useState<Item>();
     const [loading, setLoading] = useState(true);
     const [audio] = useState(new Audio('/assets/audio/LetitgoDeleteSound.mp3'));
     const apiUrl: string = 'https://todo-backend-springboot-production.up.railway.app/api/todoitems'
@@ -16,8 +16,8 @@ export const TodoService = () => {
     const handleGetItems = async () => {
         try {
             const res = await fetch(apiUrl, { method: 'GET' })
-            const jsonData: Item[] = await res.json();
-            setItems(jsonData)
+            const jsonData: Item = await res.json();
+            setAllItems(jsonData)
             setLoading(false)
 
         } catch (error) {
@@ -45,7 +45,7 @@ export const TodoService = () => {
         
       }
     return {
-        items,
+        allItems,
         loading,
         handleGetItems,
         handleDeleteItems

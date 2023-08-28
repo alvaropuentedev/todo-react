@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
 import { ButtonDelete } from '../utils';
 import { TodoService } from '../../../api';
+import { ItemElement } from '../../interfaces/ItemElement';
 
 export const ItemList = () => {
-  const { items, loading, handleGetItems, handleDeleteItems } = TodoService()
+  const { allItems, loading, handleGetItems, handleDeleteItems } = TodoService()
 
 
   
@@ -19,7 +20,7 @@ export const ItemList = () => {
             loading ? (
               <p className='text-center'>cargando...</p>
             ) : (
-              items.map(item => (
+              allItems?.items.map((item: ItemElement) => (
                 <li key={item.id_item} className='p-2 rounded-lg'>
                   <div className="flex align-middle flex-row justify-between">
                     <div className='text-lg text-black mr-24'>

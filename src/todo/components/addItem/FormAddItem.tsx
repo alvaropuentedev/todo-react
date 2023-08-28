@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Item } from '../../interfaces/Item';
 import { TodoService } from '../../../api';
+import { ItemElement } from '../../interfaces/ItemElement';
 
 export const FormAddItem = () => {
   const { handleGetItems } = TodoService();
@@ -10,7 +10,7 @@ export const FormAddItem = () => {
   const addItem = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const newItem: Item = {
+    const newItem: ItemElement = {
       id_item: 0,
       description: itemDescription,
     };
