@@ -46,7 +46,7 @@ export const FormAddItem = () => {
           value={ itemDescription }
           onChange={(e) => setItemDescription(e.target.value)}
           className="w-50 max-sm:w-72 max-sm:h-12 max-sm:rounded-md max-sm:bg-gray-200
-          max-sm:p-4 lg:border-b-2
+          max-sm:p-4 md:border-b-2
          border-gray-500 text-black focus:outline-none"
           placeholder="Añadir Item" />
         <button type='submit'></button>
