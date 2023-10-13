@@ -5,7 +5,7 @@ import { ItemElement } from '../../interfaces/ItemElement';
 export const FormAddItem = () => {
   const { handleGetItems } = TodoService();
   const [itemDescription, setItemDescription] = useState('');
-  const apiUrl: string = 'https://todo-backend-springboot-production.up.railway.app/api/todoitems'
+  const apiUrl: string = 'https://alvaropuentedev-todobackend-springboot.onrender.com/api/todoitems'
 
   const addItem = async (event: React.FormEvent) => {
     event.preventDefault();
